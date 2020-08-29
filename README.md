@@ -29,13 +29,18 @@ yarn create react-app map-supercluster-example
 yarn add --dev react-app-rewired customize-cra
 ```
 
-### 2-2. React Route + Redux
+### 2-2. Google API Key
 
-```shell
-yarn add react-router-dom redux
+I have the following in `.env`:
 ```
+REACT_APP_GOOGLE_API_KEY={My Google API Key}
+```
+so that CRA allows me to access it as `process.env.REACT_APP_GOOGLE_API_KEY`.
+Since `.env` is not tracked by Git in this repository,
+you should prepare your own `.env` to set your Google API key.
 
-### 2-3. Subdirectory Setting
+
+### 2-3. Project Subdirectory Path
 
 With the following in `package.json`:
 ```json
@@ -46,7 +51,6 @@ and my URL becomes:
 ``` 
 http://localhost:3000/minagawah/map-supercluster-example/
 ```
-
 
 ### 2-4. Emotion + Tailwind
 
@@ -62,13 +66,13 @@ If you like [these features](https://emotion.sh/docs/@emotion/styled), install i
 [twin.macro](https://github.com/ben-rogerson/twin.macro)
 allows you to write CSS-in-JS using macro syntax with Emotion (you can use Styled Components as well).
 
-**### [Step1]**  
+**## [Step1] Install `twin.macro`**  
 
 Along with `@emotion/core` and `tailwindcss`, install  and `twin.macro`.
 Also, you need `@emotion/babel-preset-css-prop` in order for `css={}` syntax to works ([more info](https://github.com/emotion-js/emotion/issues/1237)).
 Since CRA now allows you to write macro syntax, you no longer need `babel-plugin-macros`.
 
-**### [Step2]**  
+**## [Step2] Prepare Config Files**  
 Create 3 config files:
 
 `config-overrides.js`
@@ -101,8 +105,7 @@ module.exports = {
 }
 ```
 
-
-**### [Step3]**  
+**## [Step3] Use Emotion + Tailwind macro syntax!**  
 Use them in your components:
 ```js
 import css from '@emotion/css/macro'
@@ -115,6 +118,13 @@ export const Home => () => ({
     <h1>Home</h1>
   </div>
 })
+```
+
+
+### 2-5. React Route + Redux
+
+```shell
+yarn add react-router-dom redux
 ```
 
 
