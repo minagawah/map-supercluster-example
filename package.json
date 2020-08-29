@@ -1,0 +1,59 @@
+{
+  "name": "map-supercluster-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A sample React app to demonstrate the use of useSupercluster for Google Map.",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "repository": "https://github.com/minagawah/map-supercluster-example.git",
+  "homepage": "/minagawah/map-supercluster-example",
+  "keywords": [
+    "react",
+    "google-map-react",
+    "use-supercluster"
+  ],
+  "author": "mina <mina@tokyo800.jp>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/minagawah/map-supercluster-example/issues"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@emotion/core": "^10.0.35",
+    "@emotion/styled": "^10.0.27",
+    "customize-cra": "^1.0.0",
+    "react-app-rewired": "^2.1.6",
+    "tailwindcss": "^1.7.5",
+    "twin.macro": "^1.7.0"
+  }
+}
