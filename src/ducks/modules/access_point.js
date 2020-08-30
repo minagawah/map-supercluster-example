@@ -1,4 +1,4 @@
-import { MINATO_CITY_WIFI } from './data/minatoku_city';
+import { MINATO_CITY_WIFI } from './data/minato_city';
 
 export const MOUNT_POINT = 'ap';
 
