@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import tw, { css } from 'twin.macro';
+
+import {
+  listAccessPoints,
+  getAccessPoint,
+  fetchAccessPoints,
+} from '../../ducks/modules/access_point';
 
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -18,15 +25,32 @@ const mapWrapperStyle = css`
   ${tw`bg-gray-200 text-gray-500 text-sm`}
 `;
 
-export const Home = () => (
-  <div id="home" css={homeStyle}>
-    <div id="menu" css={menuStyle}>
-      <h2>Menu</h2>
-      <div tw="text-xs">
-        <span tw="font-bold mr-2">API_KEY:</span>
-        <span tw="text-gray-500">{GOOGLE_API_KEY || '(none)'}</span>
+export const Home = () => {
+  const points = useSelector(listAccessPoints);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAccessPoints());
+  }, [dispatch]);
+
+  return (
+    <div id="home" css={homeStyle}>
+      <div id="menu" css={menuStyle}>
+        <h2>Menu</h2>
+        <div tw="text-xs">
+          <span tw="font-bold mr-2">API_KEY:</span>
+          <span tw="text-gray-500">{GOOGLE_API_KEY || '(none)'}</span>
+        </div>
+        {points && points.length && points.map(ap => {
+          const { key, name, lng, lat } = ap;
+          return (
+            <div key={key} tw="mt-4">
+              {name} ({lng}, {lat})
+            </div>
+          );
+        })}
       </div>
+      <div id="map-wrapper" css={mapWrapperStyle}>Google Map</div>
     </div>
-    <div id="map-wrapper" css={mapWrapperStyle}>Google Map</div>
-  </div>
-);
+  );
+};

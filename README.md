@@ -124,7 +124,7 @@ export const Home => () => ({
 ### 2-5. React Route + Redux
 
 ```shell
-yarn add react-router-dom redux
+yarn add react-router-dom redux react-redux redux-thunk
 ```
 
 

@@ -1,6 +1,6 @@
 {
   "name": "map-supercluster-example",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "A sample React app to demonstrate the use of useSupercluster for Google Map.",
   "main": "index.js",
@@ -43,9 +43,11 @@
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.27",
