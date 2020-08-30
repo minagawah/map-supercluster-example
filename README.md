@@ -16,6 +16,8 @@ A sample React app to illustrate the use of `useSupercluster` for making marker 
 - CRA (Create React App)
 - Overrides React configuration with `react-app-rewired` and `customize-cra`.
 - CSS-in-JS using `twin.macro` (comprises of `emotion` and `tailwind`).
+- Redux structure with ["ducks" ("Redux Reducer Bundles")](https://github.com/erikras/ducks-modular-redux).
+- Google Map React + `useSuperCluster`
 
 
 <a id="what"></a>
@@ -120,13 +122,22 @@ export const Home => () => ({
 })
 ```
 
-
 ### 2-5. React Route + Redux
 
 ```shell
 yarn add react-router-dom redux react-redux redux-thunk
 ```
 
+### 2-6. Google Map React + `useSuperCluster`
+
+```shell
+yarn add google-map-react supercluster use-supercluster
+```
+
+Implemented as instructed in the following blog article:
+
+Google Maps Marker Clustering | Leigh Halliday  
+https://www.leighhalliday.com/google-maps-clustering
 
 
 <a id="notes"></a>

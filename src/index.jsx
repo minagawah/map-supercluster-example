@@ -10,14 +10,14 @@ import * as serviceWorker from './serviceWorker';
 
 const store = createStore();
 
+
+// <React.StrictMode>
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Router basename={process.env.PUBLIC_URL}>
-        <App />
-      </Router>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <Router basename={process.env.PUBLIC_URL}>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

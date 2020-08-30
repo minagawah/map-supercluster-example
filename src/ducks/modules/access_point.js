@@ -27,7 +27,7 @@ export default function reducer (state = initialState, action = {}) {
       const { geometry: { coordinates }, properties = {} } = ap;
       const name = properties['Acces Point Name'] || 'unknown';
       const no = properties['No'] || index;
-      const [lat, lng] = coordinates || [];
+      const [lng, lat] = coordinates || [];
       return { key: `minato-${no}`, name, lng, lat };
     });
 
