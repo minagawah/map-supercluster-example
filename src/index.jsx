@@ -11,7 +11,6 @@ import * as serviceWorker from './serviceWorker';
 const store = createStore();
 
 
-// <React.StrictMode>
 ReactDOM.render(
   <Provider store={store}>
     <Router basename={process.env.PUBLIC_URL}>

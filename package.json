@@ -1,6 +1,6 @@
 {
   "name": "map-supercluster-example",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "description": "A sample React app to demonstrate the use of useSupercluster for Google Map.",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "eject": "react-scripts eject"
   },
   "repository": "https://github.com/minagawah/map-supercluster-example.git",
-  "homepage": "/minagawah/map-supercluster-example",
+  "homepage": "/mina/map-supercluster",
   "keywords": [
     "react",
     "google-map-react",

@@ -8,79 +8,127 @@ A sample React app to demonstrate the use of useSupercluster for Google Map.
 [4. Notes](#notes)  
 [5. LICENSE](#license)  
 
+
 <a id="about"></a>
 ## 1. About
 
-A sample React app to illustrate the use of `useSupercluster` for making cluster markers for Google Map.
-Basically, followed the following blog article for making cluster:
+A sample app plotting cluster markers on Google Maps.  
+Simply, followed [Leigh Halliday's blog post](https://www.leighhalliday.com/google-maps-clustering).  
 
-Google Maps Marker Clustering | Leigh Halliday  
-https://www.leighhalliday.com/google-maps-clustering
-
-but, this repo has the following features as well:
+Features:
 
 - Made with CRA (Create React App)
-- Overrides React configuration with `react-app-rewired` and `customize-cra`.
 - CSS-in-JS using `twin.macro` (comprises of `emotion` and `tailwind`).
-- Redux structure with ["ducks" ("Redux Reducer Bundles")](https://github.com/erikras/ducks-modular-redux).
+- ["ducks" (Redux Reducers))](https://github.com/erikras/ducks-modular-redux) to manage WiFi spot data.
+
 
 
 <a id="what"></a>
 ## 2. What I Did
 
-### 2-1. CRA + Override
+### 2-1. CRA
 
 ```shell
 yarn create react-app map-supercluster-example
-# Override CRA
+```
+
+### 2-2. Override
+
+- `react-app-rewired`
+- `customize-cra`
+
+```shell
 yarn add --dev react-app-rewired customize-cra
 ```
 
-### 2-2. Google API Key
+### 2-3. Google API Key
 
-I have the following in `.env`:
+In `.env`:
 ```
 REACT_APP_GOOGLE_API_KEY={My Google API Key}
 ```
-so that CRA allows me to access it as `process.env.REACT_APP_GOOGLE_API_KEY`.
-Since `.env` is not tracked by Git in this repository,
-you should prepare your own `.env` to set your Google API key.
+and now I can look it up:  
+`process.env.REACT_APP_GOOGLE_API_KEY`
+
+(`.env` is not tracked in this Git repo)
 
 
-### 2-3. Project Subdirectory Path
+### 2-4. Subdirectory Path
 
-With the following in `package.json`:
+`package.json`
 ```json
-  "homepage": "/minagawah/map-supercluster-example",
-```
-CRA adds the path to `process.env.PUBLIC_URL`,
-and my URL becomes:
-``` 
-http://localhost:3000/minagawah/map-supercluster-example/
+"homepage": "/mina/map-supercluster",
 ```
 
-### 2-4. Emotion + Tailwind
+`src/index.jsx`
+```jsx
+ReactDOM.render(
+  <Provider store={store}>
+    <Router basename={process.env.PUBLIC_URL}>
+      <App />
+    </Router>
+  </Provider>,
+  document.getElementById('root')
+);
+
+Now, the path becomes:  
+``` 
+http://localhost:3000/mina/map-supercluster/
+```
+
+
+### 2-5. React Route
+
+- `react-router-dom`
 
 ```shell
-yarn add --dev @emotion/core @emotion/styled @emotion/babel-preset-css-prop
-yarn add --dev tailwindcss
-# For tailwind macro syntax.
-yarn add --dev twin.macro
+yarn add react-router-dom
 ```
-where `@emotion/styled` is optional.
-If you like [these features](https://emotion.sh/docs/@emotion/styled), install it.
 
-[twin.macro](https://github.com/ben-rogerson/twin.macro)
-allows you to write CSS-in-JS using macro syntax with Emotion (you can use Styled Components as well).
+### 2-6. Redux
 
-**## [Step1] Install `twin.macro`**  
+- `redux`
+- `react-redux`
+- `redux-thunk`
 
-Along with `@emotion/core` and `tailwindcss`, install  and `twin.macro`.
-Also, you need `@emotion/babel-preset-css-prop` in order for `css={}` syntax to works ([more info](https://github.com/emotion-js/emotion/issues/1237)).
-Since CRA now allows you to write macro syntax, you no longer need `babel-plugin-macros`.
+```shell
+yarn add redux react-redux redux-thunk
+```
 
-**## [Step2] Prepare Config Files**  
-Create 3 config files:
+In ["ducks"](https://github.com/erikras/ducks-modular-redux), Redux state is managed per feature, is actually a file which contains its reducers/selectors/actions.
+
+```
+src
+└── ducks/
+    ├── modules/
+    │   ├── data/
+    │   │   └── minato_city.js ---> WiFi Spot Data
+    │   ├── index.js ---> provides "rootReducer"
+    │   └── wifi_spot.js ---> One of the features.
+    └── index.js ---> provides "createStore"
+```
+
+### 2-7. Emotion + Tailwind
+
+**[Step1] Install NPM packages**  
+
+- `@emotion/core`
+- `@emotion/styled` (this is optional)
+- `@emotion/babel-preset-css-prop`
+- `tailwindcss`
+- `twin.macro`
+
+```shell
+yarn add --dev @emotion/core @emotion/styled @emotion/babel-preset-css-prop tailwindcss twin.macro
+```
+
+Because CRA now understands macro syntax, you no longer need `babel-plugin-macros`.
+
+[twin.macro](https://github.com/ben-rogerson/twin.macro) allows you to write CSS-in-JS (Emotion or Styled Components) easily.  
+Also, `@emotion/babel-preset-css-prop` is needed for `css={}` in your JSX to work ([more](https://github.com/emotion-js/emotion/issues/1237)).
+
+
+**[Step2] Config**  
 
 `config-overrides.js`
 ```js
@@ -112,8 +160,8 @@ module.exports = {
 }
 ```
 
-**## [Step3] Use Emotion + Tailwind macro syntax!**  
-Use them in your components:
+**[Step3] Use them!!**  
+
 ```js
 import css from '@emotion/css/macro'
 import tw from 'twin.macro';
@@ -127,13 +175,12 @@ export const Home => () => ({
 })
 ```
 
-### 2-5. React Route + Redux
 
-```shell
-yarn add react-router-dom redux react-redux redux-thunk
-```
+### 2-8. Google Maps + Cluster Markers
 
-### 2-6. Google Map React + `useSuperCluster`
+- `google-map-react`
+- `supercluster`
+- `use-supercluster`
 
 ```shell
 yarn add google-map-react supercluster use-supercluster
@@ -154,3 +201,12 @@ Choose at your option.
 
 - The UNLICENSE ([LICENSE.UNLICENSE](LICENSE.UNLICENSE))
 - MIT license ([LICENSE.MIT](LICENSE.MIT))
+
+For the part utilizing `useSupercluster` is credited to [Leigh Halliday](https://www.leighhalliday.com/google-maps-clustering).
+
+Minato-city WiFi Spot Data  
+CC BY 4.0  
+Provided by Minato-city, Tokyo.  
+https://catalog.data.metro.tokyo.lg.jp/dataset/t131032d0000000022
+
+
