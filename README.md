@@ -102,10 +102,10 @@ src
 └── ducks/
     ├── modules/
     │   ├── data/
-    │   │   └── minato_city.js ---> WiFi Spot Data
-    │   ├── index.js ---> provides "rootReducer"
-    │   └── wifi_spot.js ---> One of the features.
-    └── index.js ---> provides "createStore"
+    │   │   └── minato_city.js  <--  WiFi Spot Data
+    │   ├── index.js  <--  provides "rootReducer"
+    │   └── wifi_spot.js  <--  reducers/selectors/actions
+    └── index.js  <--  provides "createStore"
 ```
 
 ### 2-7. Emotion + Tailwind
