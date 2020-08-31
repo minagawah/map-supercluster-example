@@ -110,6 +110,8 @@ src
 
 ### 2-7. Emotion + Tailwind
 
+With [twin.macro](https://github.com/ben-rogerson/twin.macro), things are getting much easier.
+
 **[Step1] Install NPM packages**  
 
 - `@emotion/core`
@@ -122,10 +124,8 @@ src
 yarn add --dev @emotion/core @emotion/styled @emotion/babel-preset-css-prop tailwindcss twin.macro
 ```
 
-Because CRA now understands macro syntax, you no longer need `babel-plugin-macros`.
-
-[twin.macro](https://github.com/ben-rogerson/twin.macro) allows you to write CSS-in-JS (Emotion or Styled Components) easily.  
-Also, `@emotion/babel-preset-css-prop` is needed for `css={}` in your JSX to work ([more](https://github.com/emotion-js/emotion/issues/1237)).
+Because CRA now understands macro syntax, you no longer need `babel-plugin-macros`.  
+You need `@emotion/babel-preset-css-prop` `css={}` in your JSX ([discussion](https://github.com/emotion-js/emotion/issues/1237)).
 
 
 **[Step2] Config**  
