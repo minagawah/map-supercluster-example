@@ -43,14 +43,15 @@ yarn add --dev react-app-rewired customize-cra
 
 ### 2-3. Google API Key
 
-In `.env`:
+In `.env`:  
+(`.env` is not tracked in this Git repo)
+
 ```
 REACT_APP_GOOGLE_API_KEY={My Google API Key}
 ```
 and now I can look it up:  
 `process.env.REACT_APP_GOOGLE_API_KEY`
 
-(`.env` is not tracked in this Git repo)
 
 
 ### 2-4. Subdirectory Path
@@ -70,11 +71,10 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+```
 
 Now, the path becomes:  
-``` 
 http://localhost:3000/mina/map-supercluster/
-```
 
 
 ### 2-5. React Route
