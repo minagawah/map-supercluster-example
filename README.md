@@ -11,13 +11,18 @@ A sample React app to demonstrate the use of useSupercluster for Google Map.
 <a id="about"></a>
 ## 1. About
 
-A sample React app to illustrate the use of `useSupercluster` for making marker clusters for Google Map.
+A sample React app to illustrate the use of `useSupercluster` for making cluster markers for Google Map.
+Basically, followed the following blog article for making cluster:
 
-- CRA (Create React App)
+Google Maps Marker Clustering | Leigh Halliday  
+https://www.leighhalliday.com/google-maps-clustering
+
+but, this repo has the following features as well:
+
+- Made with CRA (Create React App)
 - Overrides React configuration with `react-app-rewired` and `customize-cra`.
 - CSS-in-JS using `twin.macro` (comprises of `emotion` and `tailwind`).
 - Redux structure with ["ducks" ("Redux Reducer Bundles")](https://github.com/erikras/ducks-modular-redux).
-- Google Map React + `useSuperCluster`
 
 
 <a id="what"></a>
@@ -134,10 +139,7 @@ yarn add react-router-dom redux react-redux redux-thunk
 yarn add google-map-react supercluster use-supercluster
 ```
 
-Implemented as instructed in the following blog article:
-
-Google Maps Marker Clustering | Leigh Halliday  
-https://www.leighhalliday.com/google-maps-clustering
+Followed [Leigh Halliday's blog post](https://www.leighhalliday.com/google-maps-clustering).
 
 
 <a id="notes"></a>

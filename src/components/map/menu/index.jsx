@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import tw, { css } from 'twin.macro';
 
 import {
-  listAccessPoints,
-  fetchAccessPoints,
-} from '../../../ducks/modules/access_point';
-
-const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+  spotListSelector,
+  fetchSpotListDispatcher,
+  setSpotId,
+} from '../../../ducks/modules/wifi_spot';
 
 const menuStyle = css`
   width: 30%;
@@ -16,24 +15,24 @@ const menuStyle = css`
 `;
 
 export const MapMenu = () => {
-  const points = useSelector(listAccessPoints);
+  const list = useSelector(spotListSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAccessPoints());
+    dispatch(fetchSpotListDispatcher());
   }, [dispatch]);
 
   return (
     <div id="menu" css={menuStyle}>
-      <h2>Minato City WiFi Access Points</h2>
-      <div>
-        Click the name to show it on the map.
-      </div>
+      <h2>Minato City WiFi Spots</h2>
 
-      {points && points.length && points.map(ap => {
-        const { key, name, lng, lat } = ap;
+      {list && list.length && list.map(spot => {
+        const { id, name, lng, lat } = spot;
         return (
-          <div key={key} tw="mt-4">
+          <div key={id} tw="mt-4 cursor-pointer" onClick={e => {
+            e.preventDefault();
+            dispatch(setSpotId(id));
+          }}>
             <div tw="font-bold">{name}</div>
             <div>{lat}, {lng}</div>
           </div>
@@ -42,3 +41,4 @@ export const MapMenu = () => {
     </div>
   );
 }
+

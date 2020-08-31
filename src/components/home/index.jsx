@@ -9,11 +9,9 @@ const homeStyle = css`
   ${tw`flex flex-row justify-start items-stretch`}
 `;
 
-export const Home = () => {
-  return (
-    <div id="home" css={homeStyle}>
-      <MapMenu />
-      <MapContent />
-    </div>
-  );
-}
+export const Home = () => (
+  <div id="home" css={homeStyle}>
+    <MapMenu />
+    <MapContent />
+  </div>
+)

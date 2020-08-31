@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import apReducer, { MOUNT_POINT as WAP_MOUNT_POINT } from './access_point';
+import apReducer, { MOUNT as WIFI_MOUNT_POINT } from './wifi_spot';
 
 const rootReducer = combineReducers({
-  [WAP_MOUNT_POINT]: apReducer,
+  [WIFI_MOUNT_POINT]: apReducer,
 })
 
 export default rootReducer
