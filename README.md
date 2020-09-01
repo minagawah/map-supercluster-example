@@ -99,22 +99,26 @@ yarn add react-router-dom
 yarn add redux react-redux redux-thunk
 ```
 
-In ["ducks"](https://github.com/erikras/ducks-modular-redux), Redux state is managed per feature, is actually a file which contains its reducers/selectors/actions.
+In ["ducks"](https://github.com/erikras/ducks-modular-redux), Redux state is managed per feature, is actually a file which contains its own reducers, selectors, and actions (and sometimes operations).
 
 ```
 src
 └── ducks/
     ├── modules/
     │   ├── data/
-    │   │   └── minato_city.js  <--  WiFi Spot Data
-    │   ├── index.js  <--  provides "rootReducer"
-    │   └── wifi_spot.js  <--  reducers/selectors/actions
-    └── index.js  <--  provides "createStore"
+    │   │   └── minato_city.js
+    │   │       WiFi Spot Data
+    │   ├── index.js
+    │   │   Provides "rootReducer"
+    │   └── wifi_spot.js
+    │       Reducers, selectors, actions, etc...
+    └── index.js
+        Provides "createStore"
 ```
 
-### 2-7. Emotion + Tailwind
+### 2-7. Emotion + Tailwind CSS
 
-With [twin.macro](https://github.com/ben-rogerson/twin.macro), things are getting much easier.
+With [twin.macro](https://github.com/ben-rogerson/twin.macro), things are getting easier now.
 
 **[Step1] Install NPM packages**  
 
@@ -129,10 +133,11 @@ yarn add --dev @emotion/core @emotion/styled @emotion/babel-preset-css-prop tail
 ```
 
 Because CRA now understands macro syntax, you no longer need `babel-plugin-macros`.  
-You need `@emotion/babel-preset-css-prop` `css={}` in your JSX ([discussion](https://github.com/emotion-js/emotion/issues/1237)).
+
+You need `@emotion/babel-preset-css-prop` for `css={}` to work in your JSX ([discussion](https://github.com/emotion-js/emotion/issues/1237)).
 
 
-**[Step2] Config**  
+**[Step2] Config Files**  
 
 `config-overrides.js`
 ```js

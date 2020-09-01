@@ -25,7 +25,8 @@ const headerStyle = css`
   ${tw`flex flex-row justify-start items-center text-white`}
 `;
 
-const linkStyle = tw`ml-0 no-underline text-white! hover:text-red-600!`;
+const linkStyle = tw`no-underline text-white! hover:text-red-600!`;
+const srcLinkStyle = tw`ml-6 text-sm underline`;
 
 export const App = () => (
   <div css={appStyle}>
@@ -34,6 +35,7 @@ export const App = () => (
         <img src={logo} alt="logo" css={css`height:45px; pointer-events:none;`} />
       </Link>
       <Link to='/about' css={linkStyle}>About</Link>
+      <a href="https://github.com/minagawah/map-supercluster-example" css={[linkStyle, srcLinkStyle]}>source</a>
     </header>
     <div id="container" css={css`height:100%`}>
       <Route exact path='/' component={Home} />

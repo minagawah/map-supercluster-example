@@ -1,6 +1,6 @@
 {
   "name": "map-supercluster-example",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": true,
   "description": "A sample React app to demonstrate the use of useSupercluster for Google Map.",
   "main": "index.js",
