@@ -26,8 +26,10 @@ Some features may interest you:
 - CSS-in-JS  
 [Emotion](https://github.com/emotion-js/emotion) + [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) (using [twin.macro](https://github.com/ben-rogerson/twin.macro))
 - Redux in Ducks!  
-Clicking a WiFi spot from the list lets you navigate the main map.
-To better manage the Redux state, I followed one of the Ducks proposals [(Ducks: Redux Reducer Bundles)](https://github.com/erikras/ducks-modular-redux). Yes. "Ducks" is not obsolete. It is still powerful.
+When clicking a WiFi spot from the list, it lets you navigate the main map,
+and I needed a clever design for Redux state management.
+So, I followed one of the Ducks proposals [(Ducks: Redux Reducer Bundles)](https://github.com/erikras/ducks-modular-redux).
+Yes. "Ducks" isn't obsolete. It is still powerful.
 
 
 <a id="what"></a>
