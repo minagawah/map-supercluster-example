@@ -24,10 +24,10 @@ Some features may interest you:
 
 - CRA
 - CSS-in-JS  
-[Emotion](https://github.com/emotion-js/emotion) + [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) (using [twin.macro](https://github.com/ben-rogerson/twin.macro)).
+[Emotion](https://github.com/emotion-js/emotion) + [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) (using [twin.macro](https://github.com/ben-rogerson/twin.macro))
 - Redux  
 Clicking a WiFi spot from the list lets you navigate on the main map.
-Followed [one of the "ducks" proposals (Ducks: Redux Reducer Bundles)](https://github.com/erikras/ducks-modular-redux) to design better Redux state management.
+Followed one of the "ducks" proposals [(Ducks: Redux Reducer Bundles)](https://github.com/erikras/ducks-modular-redux) to design better Redux state management
 
 
 <a id="what"></a>
@@ -41,7 +41,7 @@ yarn create react-app map-supercluster-example
 
 ### 2-2. Override CRA
 
-Adding a Babel preset `@emotion/babel-preset-css-prop`) for [Emotion](https://github.com/emotion-js/emotion).
+To add a Babel preset `@emotion/babel-preset-css-prop`) for [Emotion](https://github.com/emotion-js/emotion).
 
 - `react-app-rewired`
 - `customize-cra`
@@ -60,10 +60,11 @@ yarn add --dev react-app-rewired customize-cra
 yarn add redux react-redux redux-thunk
 ```
 
-There are many proposals for "ducks", but the idea is essentially to mange Redux state per feature.
+There are several proposals for "ducks" patterns, but the idea is essentially to mange Redux state per feature.  
 For this app, I am follwing [Ducks: Redux Reducer Bundles](https://github.com/erikras/ducks-modular-redux).
+
 As the structure bellow illustrates,
-I have `wifi_spot.js` which contans reducers/selectors/actions for Redux state manipulations associated with WiFi spots retrieved from the server.
+I have `ducks/modules/wifi_spot.js` in which I have reducers, selectors, and actions for Redux state management associated with WiFi spot data retrieved from the server.
 
 ```
 src
@@ -91,12 +92,15 @@ yarn add react-router-dom
 
 ### 2-5. Subdirectory Path
 
-CRA has a smart feature looking up subdirectory set to `"homepage"`, and automatically sets it to `process.env.PUBLIC_URL`.
+CRA has a smart feature that you can specify a subdirectory to `"homepage"` in your `package.json`,
+and CRA automatically sets it to `process.env.PUBLIC_URL`.
 
 `package.json`
 ```json
 "homepage": "/mina/map-supercluster",
 ```
+
+and in the routes:
 
 `src/index.jsx`
 ```jsx
@@ -110,7 +114,7 @@ ReactDOM.render(
 );
 ```
 
-Now, I can host the app at the specified path:  
+Now, the app is served at the specified path:  
 http://tokyo800.jp/mina/map-supercluster/
 
 
@@ -143,8 +147,8 @@ With [twin.macro](https://github.com/ben-rogerson/twin.macro), things are gettin
 yarn add --dev @emotion/core @emotion/styled @emotion/babel-preset-css-prop tailwindcss twin.macro
 ```
 
-Because CRA now understands Babel macro syntax, you no longer need `babel-plugin-macros`!  
-But, you still need `@emotion/babel-preset-css-prop` for `css={}` in your JSX to work ([discussion](https://github.com/emotion-js/emotion/issues/1237)).
+Because CRA now understands Babel macro syntax, you no longer need `babel-plugin-macros`.
+However, you still need `@emotion/babel-preset-css-prop` for `css={}` in your JSX codes to work ([more info](https://github.com/emotion-js/emotion/issues/1237)).
 
 
 **[Step2] Configs**  
