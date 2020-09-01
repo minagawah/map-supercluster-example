@@ -24,9 +24,9 @@ Some features may interest you:
 
 - CRA
 - CSS-in-JS  
-[Emotion](https://github.com/emotion-js/emotion) + [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss).
+Using [Emotion](https://github.com/emotion-js/emotion) + [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss).
 Once required elaborous efforts, but now it became extremely easy with [twin.macro](https://github.com/ben-rogerson/twin.macro)!
-- Redux in Ducks!  
+- Redux in Ducks  
 When clicking a WiFi spot from the list, it lets you navigate the main map,
 and I needed a clever design for Redux state management.
 So, I followed one of the Ducks proposals [(Ducks: Redux Reducer Bundles)](https://github.com/erikras/ducks-modular-redux).
