@@ -8,9 +8,9 @@ A sample React app to demonstrate the use of useSupercluster for Google Map.
 [4. Notes](#notes)  
 [5. LICENSE](#license)  
 
-See [Demo](http://tokyo800.jp/mina/map-supercluster/).
+See [Demo](http://tokyo800.jp/mina/map-supercluster/)
 
-![screenshot](screenshot.png "Screenshot")
+![screenshot](screenshot.jpg "Screenshot")
 
 
 <a id="about"></a>
