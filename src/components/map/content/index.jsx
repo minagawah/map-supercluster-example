@@ -10,7 +10,7 @@ import {
   spotInfoSelector,
 } from '../../../ducks/modules/wifi_spot';
 
-import marker from '../../../logo.svg';
+import marker from '../../../wifi.svg';
 
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 const MAP_PROPERTIES = { center: { lat: 35.666436, lng: 139.739212 }, zoom: 12 };
@@ -23,7 +23,9 @@ const mapContentStyle = css`
 
 const clusterMarkerStyle = css`
   border-radius: 50%;
-  ${tw`flex flex-row justify-center items-center p-10 bg-red-600 text-white text-lg`}
+  opacity: 0.75;
+  padding: 60px;
+  ${tw`flex flex-row justify-center items-center bg-xmagenta text-xmagentadark text-xl`}
 `;
 
 const markerStyle = css`background: none; border: none;`;

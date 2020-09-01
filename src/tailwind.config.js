@@ -2,7 +2,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        darkred: '#e53e3e',
+        xmagenta: '#ff0070',
+        xmagentadark: '#5c0028',
       },
     },
   },

@@ -234,4 +234,4 @@ CC BY 4.0
 Provided by Minato-city, Tokyo.  
 https://catalog.data.metro.tokyo.lg.jp/dataset/t131032d0000000022
 
-
+WiFi Icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com/).
