@@ -1,8 +1,8 @@
 {
   "name": "map-supercluster-example",
   "version": "0.1.8",
-  "private": true,
-  "description": "A sample React app to demonstrate the use of useSupercluster for Google Map.",
+  "private": false,
+  "description": "A sample React app to demonstrate plotting clustered markers on Google Maps.",
   "main": "index.js",
   "scripts": {
     "start": "react-app-rewired start",

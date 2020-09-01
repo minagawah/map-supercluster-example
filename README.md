@@ -1,6 +1,6 @@
 # map-supercluster-example
 
-A sample React app to demonstrate the use of useSupercluster for Google Map.
+A sample React app to demonstrate plotting cluster markers on Google Maps.
 
 [1. About](#about)  
 [2. What I Did](#what)  
@@ -16,15 +16,18 @@ See [Demo](http://tokyo800.jp/mina/map-supercluster/)
 <a id="about"></a>
 ## 1. About
 
-A sample app plotting cluster markers on Google Maps.  
-Simply, followed [Leigh Halliday's blog post](https://www.leighhalliday.com/google-maps-clustering).  
+A sample app plotting cluster markers on Google Maps.
+Simply followed [Leigh Halliday's blog post](https://www.leighhalliday.com/google-maps-clustering).
+The hook `useSupercluster` is also made by the same author.
 
-Features:
+Some features may interest you:
 
-- Made with CRA (Create React App)
-- CSS-in-JS using `twin.macro` (comprises of `emotion` and `tailwind`).
-- ["ducks" (Redux Reducers))](https://github.com/erikras/ducks-modular-redux) to manage WiFi spot data.
-
+- CRA
+- CSS-in-JS  
+[Emotion](https://github.com/emotion-js/emotion) + [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) (using [twin.macro](https://github.com/ben-rogerson/twin.macro)).
+- Redux  
+Clicking a WiFi spot from the list lets you navigate on the main map.
+Followed [one of the "ducks" proposals (Ducks: Redux Reducer Bundles)](https://github.com/erikras/ducks-modular-redux) to design better Redux state management.
 
 
 <a id="what"></a>
@@ -36,7 +39,9 @@ Features:
 yarn create react-app map-supercluster-example
 ```
 
-### 2-2. Override
+### 2-2. Override CRA
+
+Adding a Babel preset `@emotion/babel-preset-css-prop`) for [Emotion](https://github.com/emotion-js/emotion).
 
 - `react-app-rewired`
 - `customize-cra`
@@ -45,20 +50,48 @@ yarn create react-app map-supercluster-example
 yarn add --dev react-app-rewired customize-cra
 ```
 
-### 2-3. Google API Key
+### 2-3. Redux
 
-In `.env`:  
-(`.env` is not tracked in this Git repo)
+- `redux`
+- `react-redux`
+- `redux-thunk`
+
+```shell
+yarn add redux react-redux redux-thunk
+```
+
+There are many proposals for "ducks", but the idea is essentially to mange Redux state per feature.
+For this app, I am follwing [Ducks: Redux Reducer Bundles](https://github.com/erikras/ducks-modular-redux).
+As the structure bellow illustrates,
+I have `wifi_spot.js` which contans reducers/selectors/actions for Redux state manipulations associated with WiFi spots retrieved from the server.
 
 ```
-REACT_APP_GOOGLE_API_KEY={My Google API Key}
+src
+└── ducks/
+    ├── modules/
+    │   ├── data/
+    │   │   └── minato_city.js
+    │   │        WiFi Spot Data
+    │   ├── index.js
+    │   │    Provides "rootReducer"
+    │   └── wifi_spot.js
+    │        Reducers, selectors, actions, etc...
+    └── index.js
+         Provides "createStore"
 ```
-and now I can look it up:  
-`process.env.REACT_APP_GOOGLE_API_KEY`
 
 
+### 2-4. React Route
 
-### 2-4. Subdirectory Path
+- `react-router-dom`
+
+```shell
+yarn add react-router-dom
+```
+
+### 2-5. Subdirectory Path
+
+CRA has a smart feature looking up subdirectory set to `"homepage"`, and automatically sets it to `process.env.PUBLIC_URL`.
 
 `package.json`
 ```json
@@ -77,44 +110,22 @@ ReactDOM.render(
 );
 ```
 
-Now, the path becomes:  
-http://localhost:3000/mina/map-supercluster/
+Now, I can host the app at the specified path:  
+http://tokyo800.jp/mina/map-supercluster/
 
 
-### 2-5. React Route
 
-- `react-router-dom`
+### 2-6. Google API Key
 
-```shell
-yarn add react-router-dom
-```
-
-### 2-6. Redux
-
-- `redux`
-- `react-redux`
-- `redux-thunk`
-
-```shell
-yarn add redux react-redux redux-thunk
-```
-
-In ["ducks"](https://github.com/erikras/ducks-modular-redux), Redux state is managed per feature, is actually a file which contains its own reducers, selectors, and actions (and sometimes operations).
+In `.env`:  
+(not tracked in this Git repo)
 
 ```
-src
-└── ducks/
-    ├── modules/
-    │   ├── data/
-    │   │   └── minato_city.js
-    │   │       WiFi Spot Data
-    │   ├── index.js
-    │   │   Provides "rootReducer"
-    │   └── wifi_spot.js
-    │       Reducers, selectors, actions, etc...
-    └── index.js
-        Provides "createStore"
+REACT_APP_GOOGLE_API_KEY={My Google API Key}
 ```
+and now I can look up:  
+`process.env.REACT_APP_GOOGLE_API_KEY`
+
 
 ### 2-7. Emotion + Tailwind CSS
 
@@ -132,12 +143,11 @@ With [twin.macro](https://github.com/ben-rogerson/twin.macro), things are gettin
 yarn add --dev @emotion/core @emotion/styled @emotion/babel-preset-css-prop tailwindcss twin.macro
 ```
 
-Because CRA now understands macro syntax, you no longer need `babel-plugin-macros`.  
+Because CRA now understands Babel macro syntax, you no longer need `babel-plugin-macros`!  
+But, you still need `@emotion/babel-preset-css-prop` for `css={}` in your JSX to work ([discussion](https://github.com/emotion-js/emotion/issues/1237)).
 
-You need `@emotion/babel-preset-css-prop` for `css={}` to work in your JSX ([discussion](https://github.com/emotion-js/emotion/issues/1237)).
 
-
-**[Step2] Config Files**  
+**[Step2] Configs**  
 
 `config-overrides.js`
 ```js
