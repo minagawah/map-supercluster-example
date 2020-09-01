@@ -8,6 +8,10 @@ A sample React app to demonstrate the use of useSupercluster for Google Map.
 [4. Notes](#notes)  
 [5. LICENSE](#license)  
 
+See [Demo](http://tokyo800.jp/mina/map-supercluster/).
+
+![screenshot](screenshot.png "Screenshot")
+
 
 <a id="about"></a>
 ## 1. About
@@ -187,6 +191,22 @@ yarn add google-map-react supercluster use-supercluster
 ```
 
 Followed [Leigh Halliday's blog post](https://www.leighhalliday.com/google-maps-clustering).
+
+
+<a id="run"></a>
+## 3. Run
+
+### dev
+
+```shell
+yarn start
+```
+
+### prod
+
+```shell
+yarn build
+```
 
 
 <a id="notes"></a>
