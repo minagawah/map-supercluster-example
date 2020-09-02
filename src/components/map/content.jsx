@@ -47,8 +47,8 @@ const markerStyle = css`background: none; border: none; ${tw`absolute`}`;
 const markerIconStyle = css`height: ${iconSize}px; pointer-events: none;`
 
 const activeTextStyle = css`
-  top: ${fontSize * -2}px;
-  left: ${iconSize + 10}px;
+  top: ${iconSize + 10}px;
+  left: -40px;
   font-size: ${fontSize}px;
   width: 120px;
   opacity: 0.8;
@@ -98,14 +98,18 @@ export const MapContent = () => {
       }
       mapRef.current.panTo({ lat, lng });
     }
-  }, [spot, zoom]);
+    // Ignore "zoom" and "idle".
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [spot]);
 
+  // When any map interactions are in progress,
+  // we want to avoid other clicks on the map.
   const onMapIdle = e => {
     setIdle(true);
-    setTimeout(() => setIdle(false), 2000);
+    setTimeout(() => setIdle(false), 1500);
   };
 
-  const markerPlotter = ({ id, geometry, properties }) => {
+  const plotter = ({ id: cid, geometry, properties }) => {
     const [lng, lat] = geometry.coordinates;
     const {
       id: rawId,
@@ -114,26 +118,37 @@ export const MapContent = () => {
       point_count: count,
     } = properties;
 
-    const size = 10 + (count / list.length) * 20;
-    const moreStyle = css`width: ${size}px; height: ${size}px;`;
 
-    return isCluster ? (
-      <Marker key={`cluster-${id}`} lat={lat} lng={lng}>
-        <div
-          css={[clusterMarkerStyle, moreStyle]}
-          onClick={() => {
-            const nextZoom = Math.min(
-              supercluster.getClusterExpansionZoom(id),
-              20
-            );
-            mapRef.current.setZoom(nextZoom);
-            mapRef.current.panTo({ lat, lng });
-          }}
-        >
-          {count}
-        </div>
-      </Marker>
-    ) : (
+    const plotCluster = () => {
+      const size = 10 + (count / list.length) * 20;
+      const moreStyle = css`width: ${size}px; height: ${size}px;`;
+
+      const onClickCluster = () => {
+        if (!idle) {
+          dispatch(setSpotId(null));
+
+          const nextZoom = Math.min(
+            supercluster.getClusterExpansionZoom(cid),
+            20
+          );
+          mapRef.current.setZoom(nextZoom);
+          mapRef.current.panTo({ lat, lng });
+        }
+      };
+
+      return (
+        <Marker key={`cluster-${cid}`} lat={lat} lng={lng}>
+          <div
+            css={[clusterMarkerStyle, moreStyle]}
+            onClick={onClickCluster}
+          >
+            {count}
+          </div>
+        </Marker>
+      );
+    };
+
+    const plotMarker = () => (
       <Marker key={`spot-${rawId}`} lat={lat} lng={lng}>
         <div css={markerWrapperStyle} onClick={() => {
           dispatch(setSpotId(rawId));
@@ -151,6 +166,8 @@ export const MapContent = () => {
         </div>
       </Marker>
     );
+
+    return isCluster ? plotCluster() : plotMarker();
   };
 
   return (
@@ -174,7 +191,7 @@ export const MapContent = () => {
           ]);
         }}
       >
-        {clusters.map(markerPlotter)}
+        {clusters.map(plotter)}
       </GoogleMapReact>
     </div>
   );
