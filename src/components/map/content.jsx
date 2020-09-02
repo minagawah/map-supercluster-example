@@ -102,7 +102,7 @@ export const MapContent = () => {
 
   const onMapIdle = e => {
     setIdle(true);
-    setTimeout(() => setIdle(false), 1500);
+    setTimeout(() => setIdle(false), 2000);
   };
 
   const markerPlotter = ({ id, geometry, properties }) => {
