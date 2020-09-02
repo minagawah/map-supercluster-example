@@ -7,7 +7,7 @@ import {
   spotIdSelector,
   fetchSpotListDispatcher,
   setSpotId,
-} from '../../../ducks/modules/wifi_spot';
+} from '../../ducks/modules/wifi_spot';
 
 const menuStyle = css`
   width: 30%;
@@ -34,13 +34,12 @@ export const MapMenu = () => {
 
       {list && list.length && list.map(spot => {
         const { id, name, lng, lat } = spot;
-        const moreStyle = spotId === id ? tw`bg-xmagenta` : tw`bg-white`;
+        const moreStyle = spotId === id ? tw`bg-hotmagenta` : tw`bg-white`;
         return (
-          <div key={id} css={[spotStyle, moreStyle]} onClick={e => {
-            e.preventDefault();
+          <div key={id} css={[spotStyle, moreStyle]} onClick={() => {
             dispatch(setSpotId(id));
           }}>
-            <div tw="font-bold">{name}</div>
+            <div tw="font-bold">[{id}] {name}</div>
             <div>{lat}, {lng}</div>
           </div>
         );

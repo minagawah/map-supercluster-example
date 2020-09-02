@@ -23,11 +23,11 @@ const mockFetchSpots = () => new Promise(resolve => {
 // Selectors
 // --------------------------------------------------------
 
-export const spotListSelector = state => state[MOUNT].spots;
-
 export const spotIdSelector = state => state[MOUNT].spot_id;
 
-export const spotInfoSelector = id => state => (state[MOUNT].spots || [])[id];
+export const spotSelector = id => state => state[MOUNT].spots.find(p => p.id === id);
+
+export const spotListSelector = state => state[MOUNT].spots;
 
 export const formattedSpotListSelector = state =>
   state[MOUNT].spots.map(({ id, name, lat, lng }) => {
@@ -86,6 +86,7 @@ export default function reducer (state = initialState, action = {}) {
 // --------------------------------------------------------
 // Actions
 // --------------------------------------------------------
+
 export const setSpotId = id => {
   return {
     type: SET_SPOT_ID,

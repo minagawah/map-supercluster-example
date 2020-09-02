@@ -2,8 +2,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        xmagenta: '#ff0070',
-        xmagentadark: '#5c0028',
+        hotmagenta: '#ff0070',
+        hotmagentadark: '#5c0028',
       },
     },
   },

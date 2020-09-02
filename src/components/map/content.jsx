@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import GoogleMapReact from 'google-map-react';
 import useSupercluster from 'use-supercluster';
 import tw, { css } from 'twin.macro';
@@ -7,13 +7,21 @@ import tw, { css } from 'twin.macro';
 import {
   spotIdSelector,
   formattedSpotListSelector,
-  spotInfoSelector,
-} from '../../../ducks/modules/wifi_spot';
+  spotSelector,
+  setSpotId,
+} from '../../ducks/modules/wifi_spot';
 
-import marker from '../../../wifi.svg';
+import marker from '../../wifi.svg';
 
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
-const MAP_PROPERTIES = { center: { lat: 35.666436, lng: 139.739212 }, zoom: 12 };
+
+const MAP_PROPERTIES = {
+  center: {
+    lng: 139.751303,
+    lat: 35.669865,
+  },
+  zoom: 13,
+};
 
 const mapContentStyle = css`
   width: 70%;
@@ -25,21 +33,50 @@ const clusterMarkerStyle = css`
   border-radius: 50%;
   opacity: 0.75;
   padding: 60px;
-  ${tw`flex flex-row justify-center items-center bg-xmagenta text-xmagentadark text-xl`}
+  ${tw`
+    flex flex-row justify-center items-center
+    bg-hotmagenta text-white font-bold text-xl
+  `}
 `;
 
-const markerStyle = css`background: none; border: none;`;
-const markerIconStyle = css`height: 40px; pointer-events: none;`
+const fontSize = 15;
+const iconSize = 40;
+
+const markerWrapperStyle = tw`relative`;
+const markerStyle = css`background: none; border: none; ${tw`absolute`}`;
+const markerIconStyle = css`height: ${iconSize}px; pointer-events: none;`
+
+const activeTextStyle = css`
+  top: ${fontSize * -2}px;
+  left: ${iconSize + 10}px;
+  font-size: ${fontSize}px;
+  width: 120px;
+  opacity: 0.8;
+  ${tw`absolute p-2 bg-black text-white font-bold`}
+`;
+
+const inactiveTextStyle = css`
+  top: -10px;
+  left: ${iconSize + 10}px;
+  font-size: ${fontSize - 2}px;
+  opacity: 0.8;
+  text-align: center;
+  opacity: 0.8;
+  ${tw`absolute p-1 bg-hotmagenta text-white font-bold`}
+`;
 
 const Marker = ({ children }) => children;
 
 export const MapContent = () => {
   const [bounds, setBounds] = useState(null);
   const [zoom, setZoom] = useState(10);
+  const [idle, setIdle] = useState(false);
 
   const list = useSelector(formattedSpotListSelector);
   const spotId = useSelector(spotIdSelector);
-  const spotInfo = useSelector(spotInfoSelector(spotId));
+  const spot = useSelector(spotSelector(spotId));
+
+  const dispatch = useDispatch();
 
   const { clusters, supercluster } = useSupercluster({
     points: list,
@@ -54,15 +91,29 @@ export const MapContent = () => {
   const mapRef = useRef();
 
   useEffect(() => {
-    const { lat, lng } = spotInfo || {};
-    if (lat && lng) {
+    const { lat, lng } = spot || {};
+    if (lat && lng && !idle) {
+      if (zoom <= 15) {
+        mapRef.current.setZoom(15);
+      }
       mapRef.current.panTo({ lat, lng });
     }
-  }, [spotInfo]);
+  }, [spot, zoom]);
 
-  const plotter = ({ id, geometry, properties }) => {
+  const onMapIdle = e => {
+    setIdle(true);
+    setTimeout(() => setIdle(false), 1000);
+  };
+
+  const markerPlotter = ({ id, geometry, properties }) => {
     const [lng, lat] = geometry.coordinates;
-    const { cluster: isCluster, point_count: count } = properties;
+    const {
+      id: rawId,
+      name,
+      cluster: isCluster,
+      point_count: count,
+    } = properties;
+
     const size = 10 + (count / list.length) * 20;
     const moreStyle = css`width: ${size}px; height: ${size}px;`;
 
@@ -70,8 +121,7 @@ export const MapContent = () => {
       <Marker key={`cluster-${id}`} lat={lat} lng={lng}>
         <div
           css={[clusterMarkerStyle, moreStyle]}
-          onClick={e => {
-            e.preventDefault();
+          onClick={() => {
             const nextZoom = Math.min(
               supercluster.getClusterExpansionZoom(id),
               20
@@ -84,10 +134,21 @@ export const MapContent = () => {
         </div>
       </Marker>
     ) : (
-      <Marker key={`access-spot-${properties.id}`} lat={lat} lng={lng}>
-        <button css={markerStyle}>
-          <img src={marker} alt="marker" css={markerIconStyle} />
-        </button>
+      <Marker key={`spot-${rawId}`} lat={lat} lng={lng}>
+        <div css={markerWrapperStyle} onClick={() => {
+          dispatch(setSpotId(rawId));
+        }}>
+          <button css={markerStyle}>
+            <img src={marker} alt="marker" css={markerIconStyle} />
+          </button>
+          {spotId === rawId ? (
+            <div css={activeTextStyle}>
+              [{rawId}] {name}
+            </div>
+          ) : (
+            <div css={inactiveTextStyle}>{rawId}</div>
+          )}
+        </div>
       </Marker>
     );
   };
@@ -101,6 +162,7 @@ export const MapContent = () => {
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({ map }) => {
           mapRef.current = map;
+          mapRef.current.addListener('idle', onMapIdle);
         }}
         onChange={({ zoom, bounds }) => {
           setZoom(zoom);
@@ -112,9 +174,8 @@ export const MapContent = () => {
           ]);
         }}
       >
-        {clusters.map(plotter)}
+        {clusters.map(markerPlotter)}
       </GoogleMapReact>
     </div>
   );
 }
-

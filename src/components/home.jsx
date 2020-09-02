@@ -1,8 +1,8 @@
 import React from 'react';
 import tw, { css } from 'twin.macro';
 
-import { MapMenu } from '../map/menu';
-import { MapContent } from '../map/content';
+import { MapMenu } from './map/menu';
+import { MapContent } from './map/content';
 
 const homeStyle = css`
   height: 100%;
