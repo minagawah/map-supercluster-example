@@ -64,7 +64,7 @@ yarn add --dev react-app-rewired customize-cra
 yarn add redux react-redux redux-thunk
 ```
 
-While there are many "Ducks" patterns, the idea is to manage Redux state per *feature*.
+While there are many "Ducks" patterns, the idea is to manage Redux state per *feature*.  
 For this app, I am follwing
 [Ducks: Redux Reducer Bundles](https://github.com/erikras/ducks-modular-redux).
 
@@ -139,8 +139,10 @@ In it, I have:
 REACT_APP_GOOGLE_API_KEY={My Google API Key}
 ```
 
-Now, it becomes available from anywhere as:  
-`process.env.REACT_APP_GOOGLE_API_KEY`
+Now, it becomes available from anywhere as:
+```
+process.env.REACT_APP_GOOGLE_API_KEY
+```
 
 
 ### 2-6. Emotion + TailwindCSS
