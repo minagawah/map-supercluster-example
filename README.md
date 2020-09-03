@@ -68,7 +68,7 @@ While there are many "Ducks" patterns, the idea is to manage Redux state per *fe
 For this app, I am follwing
 [Ducks: Redux Reducer Bundles](https://github.com/erikras/ducks-modular-redux).
 
-When it asynchronously fetches "Minato-city WiFi Spots" (which is a mock),
+When it asynchronously fetches *"Minato-city WiFi Spots"* (which is a mock data),
 it stores the data to Redux state.  
 As you can see in the tree bellow,
 this `wifi_spot.js` contains *"reducers"*, *"selectors"*, and *"actions"* all in the same file.
