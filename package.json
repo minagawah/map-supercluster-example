@@ -2,7 +2,7 @@
   "name": "map-supercluster-example",
   "version": "0.2.3",
   "private": false,
-  "description": "A sample React app to demonstrate plotting clustered markers on Google Maps.",
+  "description": "A sample React app to demonstrate plotting marker clusters on Google Maps.",
   "main": "index.js",
   "scripts": {
     "start": "react-app-rewired start",
