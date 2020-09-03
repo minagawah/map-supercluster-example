@@ -71,7 +71,8 @@ For this app, I am follwing
 When it asynchronously fetches "Minato-city WiFi Spots" (which is a mock),
 it stores the data to Redux state.  
 As you can see in the tree bellow,
-`wifi_spot.js` contains *reducers*, *selectors*, and *actions*, all in one file.
+`wifi_spot.js` contains *"reducers"*, *"selectors"*, and *"actions"*,
+all in the same file.
 
 ```
 src
