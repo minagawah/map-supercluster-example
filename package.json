@@ -17,7 +17,7 @@
     "google-map-react",
     "use-supercluster"
   ],
-  "author": "mina <mina@tokyo800.jp>",
+  "author": "Hiroki Minagawa <minagawa@tokyo800.jp>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/minagawah/map-supercluster-example/issues"
