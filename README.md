@@ -64,14 +64,15 @@ yarn add --dev react-app-rewired customize-cra
 yarn add redux react-redux redux-thunk
 ```
 
-While there are many "Ducks" patterns, the idea is to manage Redux state per *feature*.  
-For this app, I am follwing
-[Ducks: Redux Reducer Bundles](https://github.com/erikras/ducks-modular-redux).
+While there are many "Ducks" patterns, the idea is to manage Redux state per *feature*.
 
-When the app fetches *"Minato-city WiFi Spots"* (which is a mock data),
-it stores the data to Redux state.  
-As you can see in the tree bellow,
-this `wifi_spot.js` contains *"reducers"*, *"selectors"*, and *"actions"* all in the same file.
+For this app, I am follwing
+[Ducks: Redux Reducer Bundles](https://github.com/erikras/ducks-modular-redux).  
+When the app fetches *"Minato-city WiFi Spots"* (which is just a mock),
+the data is stored in the state,
+but all the jobs associated with *"Minato-city WiFi Spots"* is handled by 1 file: `wifi_spot.js`.
+Check out `wifi_spot.js` and you will see
+*"reducers"*, *"selectors"*, and *"actions"* are all in the same file.
 
 ```
 src
